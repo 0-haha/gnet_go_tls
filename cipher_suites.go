@@ -17,7 +17,7 @@ import (
 	"hash"
 	"runtime"
 
-	"github.com/0-haha/gnet_go_tls/boring"
+	"github.com/0-haha/gnet_go_tls/v120/boring"
 	"golang.org/x/crypto/chacha20poly1305"
 	"golang.org/x/sys/cpu"
 )
