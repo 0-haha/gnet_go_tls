@@ -1,11 +1,11 @@
-module github.com/0-haha/gnet_go_tls
+module github.com/0-haha/gnet_go_tls/v1-20
 
 go 1.20
 
-replace github.com/0-haha/gnet_go_tls/v1-20 v0.0.0-00010101000000-000000000000 => ./
+// replace github.com/0-haha/gnet_go_tls/v1-20 v0.0.0-00010101000000-000000000000 => ./
 
 require (
-	github.com/0-haha/gnet_go_tls/v1-20 v0.0.0-00010101000000-000000000000
+	// github.com/0-haha/gnet_go_tls/v1-20 v0.0.0-00010101000000-000000000000
 	github.com/stretchr/testify v1.8.2
 	golang.org/x/crypto v0.5.0
 	golang.org/x/sys v0.4.0
