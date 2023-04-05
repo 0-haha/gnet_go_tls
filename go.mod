@@ -1,5 +1,4 @@
-module github.com/0-haha/gnet_go_tls/1-20
-
+module github.com/0-haha/gnet_go_tls
 go 1.20
 
 // replace github.com/0-haha/gnet_go_tls/v1-20 v0.0.0-00010101000000-000000000000 => ./
