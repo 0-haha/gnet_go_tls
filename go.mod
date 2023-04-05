@@ -1,4 +1,4 @@
-module github.com/0-haha/gnet_go_tls/v1-20
+module github.com/0-haha/gnet_go_tls
 
 go 1.20
 
