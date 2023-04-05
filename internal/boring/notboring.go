@@ -11,7 +11,7 @@ import (
 	"crypto/cipher"
 	"hash"
 
-	"github.com/0-haha/gnet_go_tls/v120/internal/boring/sig"
+	"github.com/0-haha/gnet-tls-go1-20/internal/boring/sig"
 )
 
 const available = false
