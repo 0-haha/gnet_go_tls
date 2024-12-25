@@ -48,7 +48,7 @@ func (hs *clientHandshakeStateTLS13) handshake() error {
 
 	// The server must not select TLS 1.3 in a renegotiation. See RFC 8446,
 	// sections 4.1.2 and 4.1.3.
-	if c.handshakes > 255 {
+	if c.handshakes > 0 {
 		return errors.New("tls: server selected TLS 1.3 in a renegotiation")
 	}
 
