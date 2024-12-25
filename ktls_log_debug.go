@@ -1,4 +1,5 @@
 //go:build debug
+
 package tls
 
 import (
@@ -7,10 +8,10 @@ import (
 
 const Dev = true
 
-func Debugln(a ...interface{}) {
+func Debugln(a ...any) {
 	log.Println(a...)
 }
 
-func Debugf(format string, a ...interface{}) {
+func Debugf(format string, a ...any) {
 	log.Printf(format, a...)
 }

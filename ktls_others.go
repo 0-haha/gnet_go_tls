@@ -3,10 +3,6 @@
 
 package tls
 
-import (
-	"net"
-)
-
 const kTLSOverhead = 0
 
 func (c *Conn) enableKernelTLS(cipherSuiteID uint16, inKey, outKey, inIV, outIV []byte) error {
