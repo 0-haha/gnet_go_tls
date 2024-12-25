@@ -25,7 +25,6 @@ import (
 type Socket interface {
 	// Fd returns the underlying file descriptor.
 	Fd() int
-	WriteTCP([]byte) (int, error)
 }
 
 // A Conn represents a secured connection.
@@ -33,6 +32,7 @@ type Socket interface {
 type Conn struct {
 	// constant
 	conn        net.Conn
+	isTLSed     bool
 	isClient    bool
 	handshakeFn func(context.Context) error // (*Conn).clientHandshake or serverHandshake
 
@@ -171,6 +171,12 @@ func (c *Conn) SetWriteDeadline(t time.Time) error {
 // TLS session.
 func (c *Conn) NetConn() net.Conn {
 	return c.conn
+}
+
+// IsTLSed returns whether the plaintext has been encrypted via TLS.
+// c.conn can safely send the encrypted data via c.conn.write (plaintext version).
+func (c *Conn) IsTLSed() bool {
+	return c.isTLSed
 }
 
 // A halfConn represents one direction of the record layer
@@ -923,7 +929,9 @@ func (c *Conn) write(data []byte) (int, error) {
 		return len(data), nil
 	}
 
-	n, err := c.conn.(Socket).WriteTCP(data)
+	c.isTLSed = true
+	n, err := c.conn.Write(data)
+	c.isTLSed = false
 	c.bytesSent += int64(n)
 	return n, err
 }
@@ -932,7 +940,10 @@ func (c *Conn) flush() (int, error) {
 	if c.sendBuf.Len() == 0 {
 		return 0, nil
 	}
-	n, err := c.conn.(Socket).WriteTCP(c.sendBuf.Bytes())
+
+	c.isTLSed = true
+	n, err := c.conn.Write(c.sendBuf.Bytes())
+	c.isTLSed = false
 	c.bytesSent += int64(n)
 	c.sendBuf.Done()
 	c.buffering = false
